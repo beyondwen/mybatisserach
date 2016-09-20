@@ -72,12 +72,15 @@ public class ProductQuery {
         if (condtion.size() > 0) {
             sql.append(" where ");
         }
+        //设置一个状态值
         boolean isNotFirst = true;
         for (String c : condtion) {
+            //如果是第一条就不添加add，并且将状态值设置为false
             if (isNotFirst) {
                 sql.append(c);
                 isNotFirst = false;
             } else {
+                //不是第一条就添加and
                 sql.append(" and ").append(c);
             }
         }
