@@ -18,7 +18,8 @@ public class ProductMapperImplTest {
 
     @Test
     public void queryPage() throws Exception {
-        PageResult<Product> list = dao.queryPage(1, 10);
+        ProductQuery query = new ProductQuery();
+        PageResult<Product> list = dao.queryPage(query);
         System.out.println(list);
         for (Product p : list.getPageList()) {
             System.out.println(p);

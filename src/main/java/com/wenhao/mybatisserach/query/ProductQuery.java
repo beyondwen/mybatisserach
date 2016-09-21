@@ -15,9 +15,24 @@ public class ProductQuery extends BaseQuery {
     private BigDecimal productMinPrice;
     private BigDecimal productMaxPrice;
 
-    private int pageSize;//每页多少条
-    private int startIndex;//起始下标
+    private int pageSize = 10;//每页多少条
+    private int currentPage = 1;//当前页
 
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public String getProductName() {
         return productName;
@@ -50,6 +65,12 @@ public class ProductQuery extends BaseQuery {
     public void setProductMaxPrice(BigDecimal productMaxPrice) {
         this.productMaxPrice = productMaxPrice;
     }
+
+    //计算起始下标
+    public int getStartIndex() {
+        return (currentPage - 1) * pageSize;
+    }
+
 
     //实现父类定义的方法
     protected void customizeSql() {

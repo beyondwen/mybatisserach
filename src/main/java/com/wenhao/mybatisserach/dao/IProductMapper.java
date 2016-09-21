@@ -14,11 +14,5 @@ import java.util.List;
 public interface IProductMapper {
     List<Product> getAll(ProductQuery query);
 
-
-    /**
-     * @param currentPage 当前页
-     * @param pageSize    每页多少条数据
-     * @return 返回一个pageResult对象
-     */
-    PageResult<Product> queryPage(int currentPage, int pageSize);
+    PageResult<Product> queryPage(ProductQuery query);
 }

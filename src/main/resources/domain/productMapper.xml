@@ -8,11 +8,10 @@
         SELECT * FROM t_product ${querySql}
     </select>
 
-    <select id="queryPage" parameterType="map"  resultType="com.wenhao.mybatisserach.domain.Product">
-        SELECT * FROM t_product LIMIT #{startIndex},#{pageSize}
+    <select id="queryPage" parameterType="com.wenhao.mybatisserach.query.ProductQuery"  resultType="com.wenhao.mybatisserach.domain.Product">
+        SELECT * FROM t_product ${querySql} LIMIT #{startIndex},#{pageSize}
     </select>
-
-    <select id="totalCount" resultType="int">
-        SELECT COUNT(*) FROM t_product
+    <select id="totalCount"  parameterType="com.wenhao.mybatisserach.query.ProductQuery" resultType="int">
+        SELECT COUNT(*) FROM t_product ${querySql}
     </select>
 </mapper>

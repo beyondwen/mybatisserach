@@ -44,19 +44,38 @@ public class ProductServlet extends HttpServlet {
         List<Product> list = dao.getAll(query);
         req.setAttribute("list", list);*/
         //===============================================================================
-        int currentPage = 1;
-        int pageSize = 10;
+        ProductQuery query = params2Object(req);
+        PageResult<Product> pageResult = dao.queryPage(query);
+        req.setAttribute("pageResult", pageResult);
+        req.setAttribute("query", query);
+        req.getRequestDispatcher("/WEB-INF/views/product/index.jsp").forward(req, resp);
+    }
+
+    public ProductQuery params2Object(HttpServletRequest req) {
+        ProductQuery query = new ProductQuery();
         String currentPageString = req.getParameter("currentPage");
         String pageSizeString = req.getParameter("pageSize");
+        String productName = req.getParameter("productName");
+        String productType = req.getParameter("productType");
+        String productMinPrice = req.getParameter("productMinPrice");
+        String productMaxPrice = req.getParameter("productMaxPrice");
         if (StringUtils.isNotEmpty(currentPageString)) {
-            currentPage = Integer.valueOf(currentPageString);
+            query.setCurrentPage(Integer.valueOf(currentPageString));
         }
         if (StringUtils.isNotEmpty(pageSizeString)) {
-            pageSize = Integer.valueOf(pageSizeString);
+            query.setPageSize(Integer.valueOf(pageSizeString));
         }
-        PageResult<Product> pageResult = dao.queryPage(currentPage, pageSize);
-        req.setAttribute("pageResult", pageResult);
-        req.getRequestDispatcher("/WEB-INF/views/product/index.jsp").forward(req, resp);
+        query.setProductName(productName);
+        query.setProductType(productType);
+        if (!StringUtils.isEmpty(productMaxPrice)) {
+            BigDecimal max = new BigDecimal(productMaxPrice);
+            query.setProductMaxPrice(max);
+        }
+        if (!StringUtils.isEmpty(productMinPrice)) {
+            BigDecimal min = new BigDecimal(productMinPrice);
+            query.setProductMinPrice(min);
+        }
+        return query;
     }
 
 

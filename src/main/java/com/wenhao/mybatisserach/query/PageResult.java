@@ -63,7 +63,7 @@ public class PageResult<T> {
 
     //获得下一页
     public int getNextPage() {
-        return currentPage > getTotalPage() ? getTotalPage() : currentPage + 1;
+        return currentPage >= getTotalPage() ? getTotalPage() : currentPage + 1;
     }
 
     @Override
