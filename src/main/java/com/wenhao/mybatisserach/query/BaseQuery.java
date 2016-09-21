@@ -20,6 +20,8 @@ public abstract class BaseQuery {
 
     public String getQuerySql() {
         StringBuilder sql = new StringBuilder();
+        //清空集合
+        condtion.clear();
         //获得子类拼接的sql
         this.customizeSql();
         if (condtion.size() > 0) {
