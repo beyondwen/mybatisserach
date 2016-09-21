@@ -2,6 +2,7 @@ package com.wenhao.mybatisserach.dao.impl;
 
 import com.wenhao.mybatisserach.dao.IProductMapper;
 import com.wenhao.mybatisserach.domain.Product;
+import com.wenhao.mybatisserach.query.PageResult;
 import com.wenhao.mybatisserach.query.ProductQuery;
 import org.junit.Test;
 
@@ -17,8 +18,9 @@ public class ProductMapperImplTest {
 
     @Test
     public void queryPage() throws Exception {
-        List<Product> list = dao.queryPage(1, 10);
-        for (Product p : list) {
+        PageResult<Product> list = dao.queryPage(1, 10);
+        System.out.println(list);
+        for (Product p : list.getPageList()) {
             System.out.println(p);
         }
     }

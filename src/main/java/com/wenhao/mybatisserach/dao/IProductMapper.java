@@ -1,6 +1,7 @@
 package com.wenhao.mybatisserach.dao;
 
 import com.wenhao.mybatisserach.domain.Product;
+import com.wenhao.mybatisserach.query.PageResult;
 import com.wenhao.mybatisserach.query.ProductQuery;
 
 import javax.management.Query;
@@ -17,7 +18,7 @@ public interface IProductMapper {
     /**
      * @param currentPage 当前页
      * @param pageSize    每页多少条数据
-     * @return 返回一个list包含的对象
+     * @return 返回一个pageResult对象
      */
-    List<Product> queryPage(int currentPage, int pageSize);
+    PageResult<Product> queryPage(int currentPage, int pageSize);
 }
