@@ -8,5 +8,6 @@
 6创建pageResult分页数据类，包含有分页的一系列参数
 7实现IProductMapper接口创建ProductMapperImpl类
 8前台页面处理
+9数据库文件在resource中 mysql数据库 jdk8
 
 
