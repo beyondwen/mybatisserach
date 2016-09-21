@@ -16,6 +16,15 @@ public class ProductMapperImplTest {
     IProductMapper dao = new ProductMapperImpl();
 
     @Test
+    public void queryPage() throws Exception {
+        List<Product> list = dao.queryPage(1, 10);
+        for (Product p : list) {
+            System.out.println(p);
+        }
+    }
+
+
+    @Test
     public void getAll() throws Exception {
         ProductQuery query = new ProductQuery();
         List<Product> list = dao.getAll(query);
