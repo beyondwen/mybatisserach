@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/9/20 0020.
  */
-public class ProductQuery {
+public class ProductQuery extends BaseQuery {
     private String productName;
     private String productType;
     private BigDecimal productMinPrice;
@@ -51,11 +51,31 @@ public class ProductQuery {
         this.productMaxPrice = productMaxPrice;
     }
 
+    //实现父类定义的方法
+    protected void customizeSql() {
+        StringBuilder sql = new StringBuilder();
+        if (StringUtils.isNotEmpty(productName)) {
+            //通过调用父类的方法拼接sql
+            super.addQuery(" productName like concat('%',#{productName},'%') ");
+        }
+        if (StringUtils.isNotEmpty(productType)) {
+            super.addQuery(" productType like concat('%',#{productType},'%') ");
+        }
+        if (productMinPrice != null) {
+            super.addQuery(" productMinPrice >= #{productMinPrice} ");
+        }
+        if (productMaxPrice != null) {
+            super.addQuery(" productMaxPrice <= #{productMaxPrice} ");
+        }
+    }
+
+
+    //=======================================================================================================
     //创建list用于存放sql
-    private List<String> condtion = new ArrayList<String>();
+    //private List<String> condtion = new ArrayList<String>();
 
     //消除where1=1的
-    public String getQuerySql() {
+    /*public String getQuerySql() {
         StringBuilder sql = new StringBuilder();
         if (StringUtils.isNotEmpty(productName)) {
             condtion.add(" productName like concat('%',#{productName},'%') ");
@@ -86,8 +106,8 @@ public class ProductQuery {
         }
         return sql.toString();
 
-    }
-
+    }*/
+    //=======================================================================================================
     /*这是带where 1=1的
     public String getQuerySql() {
         StringBuilder sql = new StringBuilder();
@@ -106,4 +126,5 @@ public class ProductQuery {
         }
         return sql.toString();
     }*/
+    //=======================================================================================================
 }
