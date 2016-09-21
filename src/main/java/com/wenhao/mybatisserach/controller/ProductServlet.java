@@ -3,6 +3,7 @@ package com.wenhao.mybatisserach.controller;
 import com.wenhao.mybatisserach.dao.IProductMapper;
 import com.wenhao.mybatisserach.dao.impl.ProductMapperImpl;
 import com.wenhao.mybatisserach.domain.Product;
+import com.wenhao.mybatisserach.query.PageResult;
 import com.wenhao.mybatisserach.query.ProductQuery;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +25,8 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productName = req.getParameter("productName");
+        //===============================================================================
+        /*String productName = req.getParameter("productName");
         String productType = req.getParameter("productType");
         String productMinPrice = req.getParameter("productMinPrice");
         String productMaxPrice = req.getParameter("productMaxPrice");
@@ -40,7 +42,20 @@ public class ProductServlet extends HttpServlet {
             query.setProductMinPrice(min);
         }
         List<Product> list = dao.getAll(query);
-        req.setAttribute("list", list);
+        req.setAttribute("list", list);*/
+        //===============================================================================
+        int currentPage = 1;
+        int pageSize = 10;
+        String currentPageString = req.getParameter("currentPage");
+        String pageSizeString = req.getParameter("pageSize");
+        if (StringUtils.isNotEmpty(currentPageString)) {
+            currentPage = Integer.valueOf(currentPageString);
+        }
+        if (StringUtils.isNotEmpty(pageSizeString)) {
+            pageSize = Integer.valueOf(pageSizeString);
+        }
+        PageResult<Product> pageResult = dao.queryPage(currentPage, pageSize);
+        req.setAttribute("pageResult", pageResult);
         req.getRequestDispatcher("/WEB-INF/views/product/index.jsp").forward(req, resp);
     }
 

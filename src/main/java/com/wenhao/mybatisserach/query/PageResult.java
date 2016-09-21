@@ -11,11 +11,11 @@ public class PageResult<T> {
     private int pageSize;//每页多少条
     private int currentPage;//当前页
 
-    public PageResult(int totalCount, List<T> pageList, int pageSize, int currentPage) {
+    public PageResult(int totalCount, List<T> pageList, int currentPage ,int pageSize) {
         this.totalCount = totalCount;
         this.pageList = pageList;
-        this.pageSize = pageSize;
         this.currentPage = currentPage;
+        this.pageSize = pageSize;
     }
 
     public int getCurrentPage() {
@@ -52,18 +52,18 @@ public class PageResult<T> {
 
     //获得总页数 计算方式 每页多少条/总共条数
     public int getTotalPage() {
-        //pageSize % totalCount 如果为0  那就是刚好除尽  总页数就是pageSize / totalCount  否则 就 +1
-        return pageSize % totalCount == 0 ? pageSize / totalCount : pageSize / totalCount + 1;
+        //totalCount%pageSize 如果为0  那就是刚好除尽  总页数就是totalCount/pageSize  否则 就 +1
+        return  totalCount%pageSize == 0 ? totalCount/pageSize : totalCount/pageSize + 1;
     }
 
     //获取上一页  如果当前页为1 就没有上一页 否则就是当前页-1
     public int getPrePage() {
-        return currentPage > 1 ? currentPage - 1 : currentPage;
+        return currentPage > 1 ? currentPage - 1 : 1;
     }
 
     //获得下一页
     public int getNextPage() {
-        return currentPage >= getTotalPage() ? currentPage : currentPage + 1;
+        return currentPage > getTotalPage() ? getTotalPage() : currentPage + 1;
     }
 
     @Override

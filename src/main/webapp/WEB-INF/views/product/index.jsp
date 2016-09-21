@@ -9,7 +9,7 @@
     <form action="/product">
         商品名称 <input type="text" name="productName">
         商品类型 <input type="text" name="productType">
-        价格区间 <input type="text" name="productMinPrice" ><input type="text" name="productPrice" >
+        价格区间 <input type="text" name="productMinPrice"><input type="text" name="productPrice">
         <input type="submit" value="查询">
     </form>
     <table border="1px" align="center" width="80%">
@@ -21,7 +21,7 @@
             <th>最高价格</th>
         </tr>
 
-        <c:forEach items="${list}" var="li" varStatus="l">
+        <c:forEach items="${pageResult.pageList}" var="li">
 
             <tr>
                 <td>${li.id}</td>
@@ -32,6 +32,9 @@
             </tr>
         </c:forEach>
     </table>
+    <a href="/product?currentPage=1">首页</a>
+    <a href="/product?currentPage=${pageResult.prePage}">上一页</a>
+    <a href="/product?currentPage=${pageResult.nextPage}">下一页</a>
 </div>
 </body>
 </html>
