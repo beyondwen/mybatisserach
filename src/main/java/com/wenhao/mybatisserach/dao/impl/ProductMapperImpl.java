@@ -18,6 +18,8 @@ public class ProductMapperImpl implements IProductMapper {
         params.put("startIndex", (currentPage - 1) * pageSize);
         params.put("pageSize", pageSize);
         SqlSession sqlSession = MybatisUtils.getSqlSession();
+        //总条数
+        int totalCount = sqlSession.selectOne("com.wenhao.mybatisserach.dao.IProductMapper.totalCount");
         List<Product> list = sqlSession.selectList("com.wenhao.mybatisserach.dao.IProductMapper.queryPage", params);
         return list;
     }
