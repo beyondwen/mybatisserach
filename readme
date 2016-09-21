@@ -1,0 +1,12 @@
+本项目是个基于mybatis的分页和高级查询的maven项目
+1首先搭建好mybatis的环境，配置数据库连接信息（db.properties,mybatis-conf.xml）
+2创建了一个工具类，通过mybatis-conf.xml来创建一个InputStream，通过sqlSessionFactoryBuilder来创建sqlSessionFactory，
+ 提供了个静态方法通过sqlSessionFactory.openSeeion()来获得sqlSession
+3创建一个查询的接口类IProductMapper，其中queryPage是高级查询和分页的方法
+4创建一个BaseQuery类这是一个基类，其它的查询类可以继承该类，具体可以看该类的注释
+5创建一个查询子类（ProductQuery）继承BaseQuery，这个查询子类封装有高级查询的条件，以及分页参数
+6创建pageResult分页数据类，包含有分页的一系列参数
+7实现IProductMapper接口创建ProductMapperImpl类
+8前台页面处理
+
+
